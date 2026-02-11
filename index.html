@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine For You</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="screen1" class="container">
+        <img id="main-img"
+            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26BRv0ThflsHCqfJA/giphy.gif"
+            alt="Valentine">
+        <h1 id="question-text">Will you be my valentine?</h1>
+        <div class="btn-container">
+            <button id="yesBtn" class="btn-yes" onclick="nextScreen(2)">Yes</button>
+            <button id="noBtn" class="btn-no" onmouseover="moveNoButton()" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <div id="screen2" class="container hidden">
+        <h2>Our Memories ❤️</h2>
+        <div class="gallery-container" id="gallery">
+        </div>
+        <button class="btn-next" onclick="nextScreen(3)">NEXT →</button>
+    </div>
+
+    <div id="screen3" class="container hidden">
+        <img id="screen3-img" src="" alt="Final">
+        <h1>Thank you ❤️</h1>
+        <button class="btn-next" onclick="showPopup()">This is your valentine present</button>
+    </div>
+
+    <div id="popup" class="modal hidden">
+        <div class="modal-content">
+            <img id="popup-img" src="" alt="Present">
+            <br>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
