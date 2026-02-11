@@ -1,56 +1,104 @@
 // --- DATA CONFIGURATION ---
+//where click No
 const imagesScreen1 = [
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4V6YIdp455xkqeX9I/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKVUn7iM8FMEU24/giphy.gif",
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/l41lUjIDpW8J6C3wA/giphy.gif"
+    "picture/sayno_pic (1).JPG",
+    "picture/sayno_pic (2).JPG",
+    "picture/sayno_pic (3).JPG",
+    "picture/sayno_pic (4).JPG",
+    "picture/sayno_pic (5).JPG",
+    "picture/sayno_pic (6).JPG",
+    "picture/sayno_pic (7).JPG",
+    "picture/sayno_pic (8).JPG",
+    "picture/sayno_pic (9).JPG"
 ];
 
 const messages = [
     "Are you sure? 🥺",
     "Really? Think again! 😢",
     "Give me a chance... 💔",
-    "I will be very sad... 😭"
+    "I will be very sad... 😭",
+    "My heart just broke a little... 💔",
+    "Nooo, don't do this to me! 😩",
+    "Even my dog would say yes... 🐶",
+    "Plot twist: you actually meant yes 😏",
+    "Error 404: Accept button not found? 🤔",
+    "This is not the button you're looking for... 👀",
+    "My mom already likes you tho... 😅",
+    "I practiced this for 3 days... 🥲",
+    "The cat says yes, why won't you? 🐱",
+    "Okay but have you considered... YES? 🤭",
+    "That button is cursed, try the other one 🙃",
+    "Wrong button bestie 😭",
+    "The universe wants you to say yes 🌍✨",
+    "I already bought matching outfits... 😬",
+    "My plants are rooting for us 🌱",
+    "Are you clicking that on purpose?! 😤",
+    "Legend says no one has ever clicked this twice... 👁️",
+    "Roses are red, violets are blue, please say yes, I'm begging you 🌹",
 ];
 
 const galleryImages = [
-    "https://picsum.photos/id/237/200/300",
-    "https://picsum.photos/id/102/200/300",
-    "https://picsum.photos/id/103/200/300",
-    "https://picsum.photos/id/104/200/300"
+    "picture/album (1).PNG",
+    "picture/album (2).PNG",
+    "picture/album (3).PNG",
+    "picture/album (4).PNG",
+    "picture/album (5).PNG",
+    "picture/album (6).PNG",
+    "picture/album (7).PNG",
+    "picture/album (8).PNG",
 ];
 
 const galleryMessages = [
-    "Lần đầu gặp nhau",
-    "Chuyến đi xa đầu tiên",
-    "Kỷ niệm ngày đặc biệt",
-    "Love you forever"
+    "Đi thư viện workdate nè, nhìn ăn xinh vcl",
+    "Hôm đưa bae ra sân bay, tự nhiên trời tuyết",
+    "Bảo tàng khủng long đồ hen, thanh xuân vườn trường, tối đó xỉn vcl",
+    "Vẻ đẹp tri thứcccccccccccccc, thích nhìn e học",
+    "Đợi bus đi date, hôm đi thủy cung",
+    "Thủy cung again, quá xinh....",
+    "Haizz....quá xinh, đúng là ngoan xinh yêu...",
+    "Tấm này bae vẽ ok quá nên không dám vẽ đè lên...để nguyên luôn",
 ];
 
-const screen3Image = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26BRv0ThflsHCqfJA/giphy.gif";
+const screen3Image = "picture/screen3Image.JPG";
 const popupImage = "https://picsum.photos/400/400";
 
 // --- LOGIC ---
 let noCount = 0;
 let yesScale = 1;
+let noScale = 1;
+
+// Khởi tạo 1 lần ở ngoài, không bị reset mỗi lần click
+let shuffledMessages = [...messages].sort(() => Math.random() - 0.5);
+let messageIndex = 0;
+let shuffledImages = [...imagesScreen1].sort(() => Math.random() - 0.5);
+let imageIndex = 0;
 
 // Screen 1: Handle "No" click
 function handleNo() {
     noCount++;
 
-    // Change text & image while index within range
-    if (noCount <= messages.length) {
-        document.getElementById('question-text').innerText = messages[noCount - 1];
-    }
-    if (noCount <= imagesScreen1.length) {
-        document.getElementById('main-img').src = imagesScreen1[noCount - 1];
+    // Message — lấy tuần tự từ mảng đã shuffle
+    if (messageIndex < shuffledMessages.length) {
+        document.getElementById('question-text').innerText = shuffledMessages[messageIndex];
+        messageIndex++;
     }
 
-    // Make Yes button bigger
-    yesScale += 0.3;
+    // Image — lấy tuần tự từ mảng đã shuffle
+    if (imageIndex < shuffledImages.length) {
+        document.getElementById('main-img').src = shuffledImages[imageIndex];
+        imageIndex++;
+    }
+
+    // Yes to dần
+    yesScale += 0.2;
     document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
 
-    // Hide No button after 6 tries
-    if (noCount > 5) {
+    // No nhỏ dần
+    noScale -= 0.1;
+    document.getElementById('noBtn').style.transform = `scale(${noScale})`;
+
+    // Ẩn No sau 9 lần
+    if (noCount > 9) {
         document.getElementById('noBtn').classList.add('hidden');
     }
 }
@@ -90,23 +138,77 @@ function renderGallery() {
     galleryImages.forEach((imgSrc, index) => {
         const card = document.createElement('div');
         card.className = 'card';
-        // Random size variation for natural layout
-        if (index % 3 === 0) card.style.width = '180px';
 
         card.innerHTML = `
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="${imgSrc}" alt="Memory">
-                        </div>
-                        <div class="card-back">
-                            <p>${galleryMessages[index] || "❤️"}</p>
-                        </div>
-                    </div>
-                `;
-        card.onclick = () => card.classList.toggle('is-flipped');
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="${imgSrc}" alt="Memory">
+                    <button class="zoom-btn" onclick="openZoom(event, '${imgSrc}', \`${galleryMessages[index] || '❤️'}\`)">
+                        🔍
+                    </button>
+                </div>
+                <div class="card-back">
+                    <p>${galleryMessages[index] || "❤️"}</p>
+                    <button class="zoom-btn zoom-btn--back" onclick="openZoom(event, '${imgSrc}', \`${galleryMessages[index] || '❤️'}\`)">
+                        🔍
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Click card để flip (không phải click vào zoom btn)
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('.zoom-btn')) {
+                card.classList.toggle('is-flipped');
+            }
+        });
+
         container.appendChild(card);
     });
 }
+
+// Zoom popup
+function openZoom(event, imgSrc, caption) {
+    // Ngăn card flip khi click zoom
+    event.stopPropagation();
+
+    const overlay = document.getElementById('zoom-overlay');
+    const zoomImg = document.getElementById('zoom-img');
+    const zoomCaption = document.getElementById('zoom-caption');
+
+    zoomImg.src = imgSrc;
+    zoomCaption.textContent = caption;
+
+    overlay.classList.remove('hidden');
+    // Trigger animation
+    requestAnimationFrame(() => {
+        overlay.classList.add('zoom-overlay--visible');
+    });
+}
+
+function closeZoom() {
+    const overlay = document.getElementById('zoom-overlay');
+    overlay.classList.remove('zoom-overlay--visible');
+    // Đợi animation xong rồi hide
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+    }, 300);
+}
+
+// Click ngoài ảnh để đóng
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('zoom-overlay');
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closeZoom();
+        }
+    });
+
+    // Phím ESC để đóng
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeZoom();
+    });
+});
 
 // Screen 3: Popup Logic
 function showPopup() {

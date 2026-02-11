@@ -82,6 +82,7 @@ button {
     height: 200px;
     perspective: 1000px;
     cursor: pointer;
+    position: relative;
 }
 
 .card-inner {
@@ -109,6 +110,7 @@ button {
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .card-front img {
@@ -116,6 +118,8 @@ button {
     height: 100%;
     object-fit: cover;
     margin: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .card-back {
@@ -124,6 +128,130 @@ button {
     transform: rotateY(180deg);
     font-size: 14px;
     font-weight: bold;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Zoom button trên card */
+.zoom-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.zoom-btn:hover {
+    transform: scale(1.2);
+    background: white;
+}
+
+.zoom-btn--back {
+    /* Ở card-back thì không cần absolute vì flex-column */
+    position: static;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+}
+
+/* Zoom Overlay */
+.zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.zoom-overlay.zoom-overlay--visible {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.zoom-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: default;
+
+    /* Animation */
+    transform: scale(0.6);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.zoom-overlay--visible .zoom-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#zoom-img {
+    max-width: min(80vw, 420px);
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+#zoom-caption {
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    max-width: min(80vw, 380px);
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    line-height: 1.4;
+}
+
+.zoom-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.zoom-close:hover {
+    transform: scale(1.15) rotate(90deg);
 }
 
 /* Popup */

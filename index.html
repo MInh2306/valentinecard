@@ -12,17 +12,20 @@
 
     <div id="screen1" class="container">
         <img id="main-img"
-            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ymt6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26BRv0ThflsHCqfJA/giphy.gif"
+            src="picture/screen1_pic.JPG"
             alt="Valentine">
         <h1 id="question-text">Will you be my valentine?</h1>
         <div class="btn-container">
             <button id="yesBtn" class="btn-yes" onclick="nextScreen(2)">Yes</button>
-            <button id="noBtn" class="btn-no" onmouseover="moveNoButton()" onclick="handleNo()">No</button>
+            <button id="noBtn" class="btn-no" onclick="handleNo()">No</button>
+            <!-- <button id="noBtn" class="btn-no" onmouseover="moveNoButton()" onclick="handleNo()">No</button> -->
         </div>
     </div>
 
     <div id="screen2" class="container hidden">
         <h2>Our Memories ❤️</h2>
+        <h3>Bấm vào ảnh để coi tin nhắn nhó...</h3>
+        <h4>Anh vẽ....hê hê</h4>
         <div class="gallery-container" id="gallery">
         </div>
         <button class="btn-next" onclick="nextScreen(3)">NEXT →</button>
@@ -30,15 +33,25 @@
 
     <div id="screen3" class="container hidden">
         <img id="screen3-img" src="" alt="Final">
-        <h1>Thank you ❤️</h1>
+        <h1>Love you ❤️</h1>
         <button class="btn-next" onclick="showPopup()">This is your valentine present</button>
     </div>
 
     <div id="popup" class="modal hidden">
         <div class="modal-content">
             <img id="popup-img" src="" alt="Present">
+            <p style="color: black;">Thấy em in tài liệu nhiều, nên tặng em nè,<br> không cần phải đi ra ngoài lạnh để đi in đâu</p>
             <br>
             <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Zoom Overlay -->
+    <div id="zoom-overlay" class="zoom-overlay hidden">
+        <div class="zoom-content">
+            <button class="zoom-close" onclick="closeZoom()">✕</button>
+            <img id="zoom-img" src="" alt="Zoomed">
+            <p id="zoom-caption"></p>
         </div>
     </div>
 
