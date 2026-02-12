@@ -60,7 +60,7 @@ const galleryMessages = [
 ];
 
 const screen3Image = "picture/screen3Image.JPG";
-const popupImage = "https://picsum.photos/400/400";
+const popupImage = "picture/present.JPEG";
 
 // --- LOGIC ---
 let noCount = 0;
